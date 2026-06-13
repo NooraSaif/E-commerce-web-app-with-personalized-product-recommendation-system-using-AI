@@ -27,17 +27,17 @@ class ProductsForm(FlaskForm):
     price = FloatField('Current Price', validators=[DataRequired()])
     description = StringField('description of Product', validators=[DataRequired()])
     in_stock = IntegerField('In Stock', validators=[DataRequired(), NumberRange(min=0)])
-    main_category = SelectField('Main Category', choices=[('Electronics', 'Electronics'),('Computers', 'Computers'),], validators=[DataRequired()])
+    main_category = SelectField('Main Category', choices=[('Electronics', 'Electronics'),('Office Products', 'Office Products'),('Computers', 'Computers'), ('Home', 'Home')], validators=[DataRequired()])
     sub_category = SelectField('Sub Category', choices=[
-        # Computers
+
         ('Cables', 'Cables'), ('NetworkAdapters', 'NetworkAdapters'), ('LaptopAccessories', 'LaptopAccessories'),
         ('PenDrives', 'PenDrives'), ('Keyboards,Mice', 'Keyboards,Mice'), ('ExternalHardDisks', 'ExternalHardDisks'),
         ('Repeaters', 'Repeaters'), ('Inks,Toners', 'Inks,Toners'), ('PCGamingPeripherals', 'PCGamingPeripherals'),
         ('HardDiskBags', 'HardDiskBags'), ('Routers', 'Routers'), ('Adapters', 'Adapters'), ('USBGadgets', 'USBGadgets'),
         ('TabletAccessories', 'TabletAccessories'), ('USBHubs', 'USBHubs'), ('Audio', 'Audio'),
         ('UninterruptedPowerSupplies', 'UninterruptedPowerSupplies'), ('InternalSolidStateDrives', 'InternalSolidStateDrives'),
-        ('Printers', 'Printers'),
-        # Electronics
+        ('Printers', 'Printers'),('Paper', 'Paper'),
+
         ('Accessories', 'Accessories'), ('Televisions', 'Televisions'), ('Projectors', 'Projectors'),
         ('SatelliteEquipment', 'SatelliteEquipment'),('Speakers', 'Speakers'), ('SmartWatches', 'SmartWatches'),
         ('MobileAccessories', 'MobileAccessories'), ('Smartphones', 'Smartphones'), ('MemoryCards', 'MemoryCards'),
