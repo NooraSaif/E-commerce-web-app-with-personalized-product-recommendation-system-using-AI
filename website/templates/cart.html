@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %} Shopping-Cart {% endblock %}
+
+{% block body %}
+<section class="py-5">
+    <div class="container">
+        {% if cart %}
+        <div class="row g-4">
+            <!-- Cart products -->
+            <div class="col-lg-8">
+                <h4 class="mb-4">Shopping Cart</h4>
+                
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-body p-4">
+                        {% for product in cart %}
+                        <div class="row gy-3 {% if not loop.last %}border-bottom mb-4 pb-4{% endif %}">
+                            <!-- Product Image -->
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <img src="{{ product.product.product_picture }}" alt="{{ product.product.product_name }}" class="img-fluid" style="max-height: 100px; object-fit: contain;">  
+                            </div>
+                            <!-- Product Details -->
+                            <div class="col-8 col-md-9 col-lg-10">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">{{ product.product.product_name }}</h6>
+                                        <p class="text-muted fw-bold small mb-2">{{ product.product.main_category }}</p>
+                                        
+                                        <div class="d-flex align-items-center mb-3">
+                                            <p class="text-muted fw-bold small me-2">Quantity:</p>
+                                            <div class="btn-group btn-group-sm border rounded" role="group">
+                                                <button class="btn btn-light border-end minus-cart" pid="{{product.id}}"><i class="bi bi-dash"></i></button>
+                                                <span class="px-3 py-1 fw-bold bg-white align-self-center" id="quantity{{product.id}}">{{ product.quantity }}</span>
+                                                <button class="btn btn-light border-start plus-cart" pid="{{product.id}}"><i class="bi bi-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <p class="fw-bold mb-1">OMR {{ product.product.price }}</p>
+                                        <button class="btn btn-link small text-danger p-0 mt-3 text-decoration-none remove-cart" pid="{{product.id}}">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="col-lg-4">
+                <h4 class="mb-4">Summary</h4>
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="fw-bold text-muted">Total</p>
+                            <p class="fw-bold">OMR <span id="amount_tt">{{ amount }}</span></p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <p class="fw-bold text-muted">Shipping Fee</span>
+                            <p class="fw-bold text-success">OMR 2.000</p>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Total</h5>
+                            <h5 class="fw-bold text-danger mb-0">OMR <span id="totalamount">{{ total }}</span></h5>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="/checkout" class="btn btn-custom rounded-4 shadow-sm">Checkout</a>
+                            <a href="{{ url_for('views.home') }}" class="btn btn-outline-secondary border-0 rounded-4 py-2">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="text-center py-5">
+            <div class="mb-3"><i class="bi bi-bag-x fs-1 text-muted"></i></div>
+            <h4>Your cart is empty</h4>
+            <p class="text-muted mb-4">Looks like you haven't added anything to your cart yet.</p>
+            <a href="{{ url_for('views.home') }}" class="btn btn-custom mt-4 shadow-sm rounded-pill">Start Shopping</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Product {% endblock %}
+
+{% block body %}
+<section class="d-flex py-5 card-bg-color">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 rounded-4 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <a href="/view_products" class="btn btn-sm rounded-pill btn-outline-secondary me-3"><i class="bi bi-arrow-left"></i></a>
+                            <h4 class="mb-0">Update Product</h4>
+                        </div>
+
+                        <form action="{{ url_for('admin.update_product', product_id=product.id) }}" method="POST" enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}                           
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label text-uppercase small fw-bold text-muted">Product Name</label>
+                                    {{ form.product_name(class="form-control") }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-uppercase small fw-bold text-muted">Price (OMR)</label>
+                                    {{ form.price(class="form-control") }}
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-uppercase small fw-bold text-muted">Description</label>
+                                    {{ form.description(class="form-control", rows="4") }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-uppercase small fw-bold text-muted">Stock Quantity</label>
+                                    {{ form.in_stock(class="form-control") }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-uppercase small fw-bold text-muted">Main Category</label>
+                                    {{ form.main_category(class="form-select") }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-uppercase small fw-bold text-muted">Sub Category</label>
+                                    {{ form.sub_category(class="form-select") }}
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <label class="form-label text-uppercase small fw-bold text-muted">Product Image</label>
+                                    <div class="d-flex align-items-center border rounded p-3 bg-light">
+                                        {% if product.product_picture %}
+                                            <img src="{{ url_for('admin.get_image', filename=product.product_picture.split('/')[-1]) }}" alt="Current" class="border rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+                                        {% endif %}
+                                        <div class="d-flex flex-column">
+                                            <p class="text-primary small mb-2">Optional</p>
+                                            {{ form.product_picture(class="form-control form-control-sm") }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4 d-grid gap-2">
+                                    {{ form.update_product(class="btn btn-custom") }}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

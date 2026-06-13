@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} Admin Page {% endblock %}
+
+{% block body %}
+    <div class="container py-4 min-vh-100">
+        <div class="text-center my-5">
+            <h2>Store Management</h2>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <!-- Products Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-0 rounded-4 shadow-sm py-3">
+                    <div class="card-body">
+                        <div class="bg-primary bg-opacity-10 py-2 mb-3 rounded-circle d-inline-block" style="width: 60px">
+                            <i class="bi bi-box-seam fs-3 text-primary"></i>
+                        </div>
+                        <h5>Products</h5>
+                        <p class="small text-muted">View, update, or delete products</p>
+                        <a href="/view_products" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-0 rounded-4 shadow-sm py-3">
+                    <div class="card-body">
+                        <div class="bg-info bg-opacity-10 py-2 mb-3 rounded-circle d-inline-block" style="width: 60px">
+                            <i class="bi bi-people fs-3 text-info"></i>
+                        </div>
+                        <h5>Customers</h5>
+                        <p class="small text-muted">View registered customers</p>
+                        <a href="/view_customers" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-0 rounded-4 shadow-sm py-3">
+                    <div class="card-body">
+                        <div class="bg-success bg-opacity-10 py-2 mb-3 rounded-circle d-inline-block" style="width: 60px">
+                            <i class="bi bi-cart-check fs-3 text-success"></i>
+                        </div>
+                        <h5>Orders</h5>
+                        <p class="small text-muted">View or update status</p>
+                        <a href="/view_orders" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Product Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-0 rounded-4 shadow-sm py-3">
+                    <div class="card-body">
+                        <div class="bg-warning bg-opacity-10 py-2 mb-3 rounded-circle d-inline-block" style="width: 60px">
+                            <i class="bi bi-plus-circle fs-3 text-warning"></i>
+                        </div>
+                        <h5>New Entry</h5>
+                        <p class="small text-muted">Add new product</p>
+                        <a href="/add_product" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.product_name }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid p-4 min-vh-100">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="{{ product.product_picture }}" alt="" class="img-fluid shadow-sm rounded" style=" object-fit: cover; width: 95%; max-height: 90%">
+        </div>
+        <div class="col-md-7">
+            <h2 class="mb-3">{{ product.product_name }}</h2>
+            <p class="text-muted mb-3">{{ product.main_category }} / {{ product.sub_category }}</p>
+            <h3 class="mb-4">{{ product.price }} <span class="fs-6 text-muted fw-normal">OMR</span></h3>
+            
+            <div class="mb-4">
+                <h6 class="border-bottom small text-muted mb-2 pb-2">About this product</h6>
+                <p class="text-muted" style="text-align: justify; line-height: 1.6;">{{ product.description }}</p>
+            </div>
+
+            <div class="card-footer border-0">
+                <a href="/add_to_cart/{{ product.id }}" class="btn btn-custom me-3 px-3">Add to Cart</a>
+                <a href="/cart" class="btn btn-outline-secondary px-3">View Cart</a>
+            </div>
+        </div>
+    </div>
+
+    {% if recommendations %}
+    <div class="container my-5">
+        <div class="mb-4">
+            <h2>Similar products you may like</h2>
+        </div>
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 gy-4">
+        {% for product in recommendations %}
+        <div class="col">
+            <div class="card d-flext justify-content-between h-100 border-0 shadow-sm">
+                <a href="{{ url_for('views.product_detail', product_id=product.id) }}" class="text-dark">
+                    <img src="{{ product.product_picture }}" alt="{{ product.product_name }}" class="card-img-top" style="height: 160px; object-fit: cover;">
+                    <div class="card-body pb-2">
+                        <h6 class="card-title small mb-1">{{ product.product_name }}</h6>
+                        <p class="card-text text-muted fw-bold">{{ product.price }} OMR</p>
+                    </div>
+                </a>
+                <div class="card-footer border-0 bg-white px-2">
+                    <a href="/add_to_cart/{{ product.id }}" class="btn btn-sm btn-dark">Add to cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

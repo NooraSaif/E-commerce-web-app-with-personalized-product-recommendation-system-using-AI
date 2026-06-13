@@ -1,0 +1,48 @@
+/* Main Rules */
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #f5f3ff; 
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand, .btn { 
+            font-family: 'Montserrat', sans-serif; 
+        }
+
+a { 
+    text-decoration: none; 
+    color: inherit; 
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Main Colors */
+.navbar-bg-color {
+    background-color: #511361;
+}
+.navbar-brand { 
+    color: #ecad65; 
+}
+.navbar-brand:hover {
+    color: #ecad65;
+}
+.footer-bg-color {
+    background-color: #eeeeee;
+}
+.card-bg-color {
+    background-color: #f8f9fa;
+}
+.btn-custom {
+    background-color: #511361;
+    color: white;
+    border-radius: 8px;
+}
+.btn-custom:hover {
+    background-color: #511361;
+    color: white;
+}
+
+ 

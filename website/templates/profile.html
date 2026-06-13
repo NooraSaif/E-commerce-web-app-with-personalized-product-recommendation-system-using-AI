@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block body %}
+    <div class="container min-vh-100 mt-4 pt-4">
+        <div class="row">
+            <!-- Sidebar column -->
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 rounded-3 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <h5 class="text-capitalize mb-1">{{ user.user_name }}</h5>
+                        <p class="small text-muted">Account Management</p>
+                        
+                        <hr class="my-4">
+
+                        <ul class="nav flex-column nav-pills text-start">
+                          <li class="nav-item">
+                            <a class="nav-link bg-secondary-subtle text-dark mb-2 py-2" aria-current="page" href="#"><i class="bi bi-person-circle me-2"></i> My Profile</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-dark mb-2 py-2" href="/my_orders"><i class="bi bi-box-seam me-2"></i> My Orders</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-dark mb-2 py-2" href="/change-password/{{ user.id }}"><i class="bi bi-shield-lock me-2"></i> Change password</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link py-2 text-danger" href="/logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</a>
+                          </li>
+                        </ul>     
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Details column -->
+            <div class="col-lg-8">
+                <div class="card border-0 rounded-3 shadow-sm">
+                    <div class="card-header pt-4 px-4 bg-transparent border-0">
+                        <h5 class="mb-0">Personal Information</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="bg-light border rounded p-3">
+                                    <label class="form-label small text-muted fw-bold text-uppercase mb-1">User name</label>
+                                    <p class="fs-6 text-capitalize mb-0">{{ user.user_name }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light border rounded p-3">
+                                    <label class="form-label small text-muted fw-bold text-uppercase mb-1">Email Address</label>
+                                    <p class="fs-6 mb-0">{{ user.email }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light border rounded p-3">
+                                    <label class="form-label small text-muted fw-bold text-uppercase mb-1">Phone Number</label>
+                                    <p class="fs-6 mb-0">{{ user.phone_number }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

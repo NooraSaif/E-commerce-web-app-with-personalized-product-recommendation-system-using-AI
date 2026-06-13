@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %} View orders {% endblock %}
+
+{% block body %}
+<div class="container-fluid p-4 min-vh-100">
+        <div class="mb-4">
+            <h2 class="fw-bold text-dark mb-1">Order Management</h2>
+            <p class="text-muted mb-0">View or update order status</p>
+        </div>
+        
+    {% if orders | length < 1 %}
+    <div class="alert alert-secondary text-center" role="alert">
+        No orders recorded
+    </div>
+    {% else %}
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0 table-hover">
+                    <thead class="small fw-bold text-uppercase">
+                        <tr class="table-light">
+                            <th class="ps-3 pt-4">No.</th>
+                            <th scope="col">Payment ID</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Total OMR</th>
+                            <th scope="col">Status</th>
+                            <th class="pe-4 text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td class="ps-3 fw-bold">{{ loop.index }}</td>
+                            <td>
+                                <div class="d-flex flex-column align-items-start justify-content-center">
+                                    <span class="small">{{ order.payment_id }}</span>
+                                    <span class="small text-muted">Added: {{ order.created_at.strftime('%d-%m-%y') }}</span>
+                                </div>
+                            </td>
+                            <td class="small">{{ order.user.email }}</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ order.product.product_picture }}" alt="" class="rounded me-2 border" style="height: 40px; width: 40px; object-fit: cover;">
+                                    <span class="fw-bold small">{{ order.product.product_name }} <span class="text-primary">x{{ order.quantity }}</span></span>
+                                </div>
+                            </td>
+                            <td class="small">{{ "%.3f"|format(order.price * order.quantity) }}</td>
+                            <td>
+                                <span class="rounded-pill px-3 badge {% if order.status == 'Confirmed' %}bg-success{% elif order.status == 'Packaging' %}bg-info{% elif order.status == 'Shipped' %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {{ order.status }}
+                                </span>
+                            </td>
+                            <td class="text-end pe-3">
+                                <a href="/update_order/{{order.id}}" class="btn btn-outline-dark btn-sm rounded-pill">Update</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    </div>
+{% endblock %}

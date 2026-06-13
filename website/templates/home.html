@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<main class="container-fluid px-0">
+    <div class="row g-0">
+        <div class="col-12">
+            <div class="d-flex align-items-center p-4 p-md-5" style="min-height: 440px; background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);">
+                <div class="container d-flex align-items-center flex-wrap">
+                    <div class="col-lg-7">
+                        <span class="badge rounded-pill mb-3 px-3 py-2 shadow-sm" style="background-color: #c2efb0; color: #000000; font-weight: 600;">NEWS: New Technology added!</span>
+                        <h1 class="display-4 fw-bold text-dark mb-3">Electronic Products <br><span style="color: #e69d4b;">you'll love.</span></h1>
+                        <p class="lead text-muted mb-4">Login to see our personalized recommendation system <br>tailored just for you.</p>
+                    </div>
+                    <div class="col-lg-5 ms-auto d-none d-lg-block text-center">
+                        <img src="{{ url_for('static', filename='images/homepage.png') }}" alt="Banner Image" class="img-fluid" style="max-width: 100%; max-height: 320px; filter: drop-shadow(0 10px 15px rgba(109, 40, 217, 0.2));">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid px-0 pb-1 shadow-sm" style="background-color: #efd4f0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 p-4 d-flex align-items-center">
+                    <div class="bg-light p-2 rounded m-1"><i class="bi bi-key"></i></div>
+                    <div class="small">
+                        <div class="font-weight-bold mb-1"> Secure Checkout</div>
+                        <div class="text-muted"> Encrypted payment</div>
+                    </div>
+                </div>
+                <div class="col-md-3 p-4 d-flex align-items-center">
+                    <div class="bg-light p-2 rounded m-1 "><i class="bi bi-box-seam"></i></div>
+                    <div class="small">
+                        <div class="font-weight-bold mb-1"> Free Returns</div>
+                        <div class="text-muted"> Easy 14-Day Returns</div>
+                    </div>
+                </div>
+                <div class="col-md-3 p-4 d-flex align-items-center">
+                    <div class="bg-light p-2 rounded m-1"><i class="bi bi-search-heart"></i></div>
+                    <div class="small">
+                        <div class="font-weight-bold mb-1"> Find prefrence</div>
+                        <div class="text-muted"> recommanded for you</div>
+                    </div>
+                </div>
+                <div class="col-md-3 p-4 d-flex align-items-center">
+                    <div class="bg-light p-2 rounded m-1"><i class="bi bi-shield-check"></i></div>
+                    <div class="small">
+                        <div class="font-weight-bold mb-1"> Quality Guaranteed</div>
+                        <div class="text-muted"> Long-term value</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- display recommendation -->
+{% if current_user.is_authenticated and recommendations %}
+<div class="container my-5">
+        <div class="mb-4">
+            <h2>Recommended for you</h2>
+            <p class="text-muted">based on your interests</p>
+        </div>
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 gy-4">
+        {% for product in recommendations %}
+        <div class="col">
+            <div class="card d-flext justify-content-between h-100 shadow-sm border-0">
+                <a href="{{ url_for('views.product_detail', product_id=product.id) }}" class="text-dark">
+                    <img src="{{ product.product_picture }}" alt="{{ product.product_name }}" class="card-img-top" style="height: 160px; object-fit: cover;">
+                    <div class="card-body p-2">
+                        <h6 class="card-title small mb-1" style="font-size: 0.9rem;">{{ product.product_name }}</h6>
+                        <p class="card-text text-muted fw-bold">{{ product.price }} OMR</p>
+                    </div>
+                </a>
+                <div class="card-footer border-0 bg-white px-2">
+                    <a href="/add_to_cart/{{ product.id }}" class="btn btn-outline-dark btn-sm">Add to cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- display all product -->
+<div class="container my-5" id="categoty-section">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+            <h2>All products</h2>
+        </div>
+    </div>
+    <div class="mb-4">
+        <a href="{{ url_for('views.home') }}#categoty-section" class="btn btn-sm rounded-pill {{ 'btn-dark' if not selected_main_category else 'btn-outline-dark' }} px-3 mb-2">All</a>
+        {% for category in main_categories %}
+        <a href="{{ url_for('views.home', main_category=category) }}#categoty-section" 
+           class="btn btn-sm rounded-pill {{ 'btn-dark' if selected_main_category == category else 'btn-outline-dark' }} px-3 mb-2">
+            {{ category }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 gy-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card d-flext justify-content-between h-100 shadow-sm border-0">
+                <a href="{{ url_for('views.product_detail', product_id=product.id) }}">
+                    <img src="{{ product.product_picture }}" alt="{{ product.product_name }}" class="card-img-top" style="height: 190px; object-fit: cover;">
+                    <div class="card-body p-2">
+                        <h6 class="card-title small mb-1">{{ product.product_name }}</h6>
+                        <p class="card-text text-muted fw-bold">{{ product.price }} OMR</p>
+                    </div>
+                </a>
+                <div class="card-footer border-0 bg-white px-2">
+                    <a href="/add_to_cart/{{ product.id }}" class="btn btn-outline-dark btn-sm" >Add to cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

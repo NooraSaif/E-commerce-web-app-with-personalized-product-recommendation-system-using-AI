@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Order {% endblock %}
+
+{% block body %}
+<div class="container-fluid p-5 min-vh-100">
+    <div class="row justify-content-center">
+        <div class=" col-lg-5 col-md-6">
+            <div class="card border-0 rounded-3 shadow-sm">
+                <div class="card-body p-md-5 p-4">
+                    <h4 class="mb-4">Update Order Status</h4>
+                        
+                    <form action="" method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">Select New status</label>
+                            {{ form.status(class="form-select") }}
+                        </div>
+                        <div class="d-grid">
+                            {{ form.change(class="btn btn-custom shadow-sm fw-bold") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
