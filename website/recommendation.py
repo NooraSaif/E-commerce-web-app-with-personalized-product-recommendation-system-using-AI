@@ -6,12 +6,13 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Cache for store similarity matrix (2-minute)
-similarity_matrix_cache = TTLCache(maxsize=1, ttl=120)
-# Cache for store final result of search operation (2-minute)
-recommendation_cache = TTLCache(maxsize=1000, ttl=120)
+# Cache for store similarity matrix (24h)
+similarity_matrix_cache = TTLCache(maxsize=1, ttl=86400)
+# Cache for store final result of search operation (24h)
+recommendation_cache = TTLCache(maxsize=1000, ttl=86400)
 
 class PersonalizedRecommendationSystem:
+    
     # Initialize the recommendation system.
     def __init__(self, max_features=500):
         self.max_features = max_features
@@ -20,6 +21,7 @@ class PersonalizedRecommendationSystem:
         self.similarity_matrix = None
         self.products = []
         self.product_ids = []
+        
     # Build recommendation model using TF-IDF and cosine similarity
     def build_model(self, products):
         try:
